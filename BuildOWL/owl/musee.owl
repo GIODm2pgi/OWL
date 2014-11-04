@@ -116,56 +116,6 @@
 
 
 
-###  http://www.musee.com/ontologies/musee.owl#aThèmeActivité
-
-:aThèmeActivité rdf:type owl:ObjectProperty ;
-                
-                rdfs:range :Activité ;
-                
-                rdfs:subPropertyOf :aThème .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#aThèmeDivers
-
-:aThèmeDivers rdf:type owl:ObjectProperty ;
-              
-              rdfs:range :Divers ;
-              
-              rdfs:subPropertyOf :aThème .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#aThèmeGéographie
-
-:aThèmeGéographie rdf:type owl:ObjectProperty ;
-                  
-                  rdfs:range :Géographie ;
-                  
-                  rdfs:subPropertyOf :aThème .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#aThèmePersonne
-
-:aThèmePersonne rdf:type owl:ObjectProperty ;
-                
-                rdfs:range :Personne ;
-                
-                rdfs:subPropertyOf :aThème .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#aThèmeÉpoque
-
-:aThèmeÉpoque rdf:type owl:ObjectProperty ;
-              
-              rdfs:subPropertyOf :aThème ;
-              
-              rdfs:range :Époque .
-
-
-
 ###  http://www.musee.com/ontologies/musee.owl#aVille
 
 :aVille rdf:type owl:FunctionalProperty ,
@@ -275,16 +225,6 @@
 
 
 
-###  http://www.musee.com/ontologies/musee.owl#estThèmeActivitéDe
-
-:estThèmeActivitéDe rdf:type owl:ObjectProperty ;
-                    
-                    owl:inverseOf :aThèmeActivité ;
-                    
-                    rdfs:subPropertyOf :estThèmeDe .
-
-
-
 ###  http://www.musee.com/ontologies/musee.owl#estThèmeDe
 
 :estThèmeDe rdf:type owl:ObjectProperty ;
@@ -294,46 +234,6 @@
             rdfs:domain :Thème ;
             
             owl:inverseOf :aThème .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#estThèmeDiversDe
-
-:estThèmeDiversDe rdf:type owl:ObjectProperty ;
-                  
-                  owl:inverseOf :aThèmeDivers ;
-                  
-                  rdfs:subPropertyOf :estThèmeDe .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#estThèmeGéographieDe
-
-:estThèmeGéographieDe rdf:type owl:ObjectProperty ;
-                      
-                      owl:inverseOf :aThèmeGéographie ;
-                      
-                      rdfs:subPropertyOf :estThèmeDe .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#estThèmePersonneDe
-
-:estThèmePersonneDe rdf:type owl:ObjectProperty ;
-                    
-                    owl:inverseOf :aThèmePersonne ;
-                    
-                    rdfs:subPropertyOf :estThèmeDe .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#estThèmeÉpoqueDe
-
-:estThèmeÉpoqueDe rdf:type owl:ObjectProperty ;
-                  
-                  owl:inverseOf :aThèmeÉpoque ;
-                  
-                  rdfs:subPropertyOf :estThèmeDe .
 
 
 
@@ -423,22 +323,6 @@
 #################################################################
 
 
-###  http://www.musee.com/ontologies/musee.owl#Activité
-
-:Activité rdf:type owl:Class ;
-          
-          rdfs:subClassOf :Thème .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#Divers
-
-:Divers rdf:type owl:Class ;
-        
-        rdfs:subClassOf :Thème .
-
-
-
 ###  http://www.musee.com/ontologies/musee.owl#Département
 
 :Département rdf:type owl:Class ;
@@ -452,14 +336,6 @@
 :FermetureAnnuelle rdf:type owl:Class ;
                    
                    rdfs:subClassOf :Période .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#Géographie
-
-:Géographie rdf:type owl:Class ;
-            
-            rdfs:subClassOf :Thème .
 
 
 
@@ -504,14 +380,6 @@
 
 
 
-###  http://www.musee.com/ontologies/musee.owl#Personne
-
-:Personne rdf:type owl:Class ;
-          
-          rdfs:subClassOf :Thème .
-
-
-
 ###  http://www.musee.com/ontologies/musee.owl#Période
 
 :Période rdf:type owl:Class .
@@ -551,14 +419,6 @@
 :Ville rdf:type owl:Class ;
        
        rdfs:subClassOf :Localisation .
-
-
-
-###  http://www.musee.com/ontologies/musee.owl#Époque
-
-:Époque rdf:type owl:Class ;
-        
-        rdfs:subClassOf :Thème .
 
 
 
@@ -661,47 +521,6 @@
      :aDépartement :D_BAS-RHIN ;
      
      :estVilleDe :D_BAS-RHIN .
-
-
-
-
-
-#################################################################
-#
-#    General axioms
-#
-#################################################################
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Activité
-                :Divers
-                :Géographie
-                :Personne
-                :Époque
-              )
-] .
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :Activité
-                :Divers
-                :Département
-                :FermetureAnnuelle
-                :Géographie
-                :HoraireOuverture
-                :Localisation
-                :Musée
-                :MuséeDisponible
-                :OuvertureNocture
-                :Personne
-                :Période
-                :Région
-                :Réouverture
-                :SiteWeb
-                :Thème
-                :Ville
-                :Époque
-              )
-] .
 
 
 
