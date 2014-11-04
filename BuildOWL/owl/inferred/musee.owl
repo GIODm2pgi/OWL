@@ -1,0 +1,534 @@
+@prefix : <http://www.musee.com/ontologies/musee.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.musee.com/ontologies/musee.owl> .
+
+<http://www.musee.com/ontologies/musee.owl> rdf:type owl:Ontology .
+
+
+#################################################################
+#
+#    Object Properties
+#
+#################################################################
+
+
+###  http://www.musee.com/ontologies/musee.owl#aDépartement
+
+:aDépartement rdf:type owl:FunctionalProperty ,
+                       owl:ObjectProperty ;
+              
+              rdfs:range :Département ;
+              
+              rdfs:domain :Ville ;
+              
+              owl:inverseOf :estDépartementDe .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aFermetureAnnuelle
+
+:aFermetureAnnuelle rdf:type owl:ObjectProperty ;
+                    
+                    rdfs:range :FermetureAnnuelle ;
+                    
+                    rdfs:domain :Musée .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aLocalisation
+
+:aLocalisation rdf:type owl:FunctionalProperty ,
+                        owl:ObjectProperty ;
+               
+               rdfs:range :Localisation ;
+               
+               rdfs:domain :Musée .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aMusee
+
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aOuvertureNocturne
+
+:aOuvertureNocturne rdf:type owl:ObjectProperty ;
+                    
+                    rdfs:domain :Musée ;
+                    
+                    rdfs:range :OuvertureNocture ;
+                    
+                    owl:inverseOf :estOuvertureNoctureDe .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aPériodeOuverture
+
+:aPériodeOuverture rdf:type owl:FunctionalProperty ,
+                            owl:ObjectProperty ;
+                   
+                   rdfs:domain :HoraireOuverture ;
+                   
+                   rdfs:range :HoraireOuverture ;
+                   
+                   rdfs:domain :Musée .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aRégion
+
+:aRégion rdf:type owl:FunctionalProperty ,
+                  owl:ObjectProperty ;
+         
+         rdfs:domain :Département ;
+         
+         rdfs:range :Région ;
+         
+         owl:inverseOf :estRégionDe .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aRéouverture
+
+:aRéouverture rdf:type owl:ObjectProperty ;
+              
+              rdfs:domain :Musée ;
+              
+              rdfs:range :Réouverture ;
+              
+              owl:inverseOf :estRéouvertureDe .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aSiteWeb
+
+:aSiteWeb rdf:type owl:ObjectProperty ;
+          
+          rdfs:domain :Musée ;
+          
+          rdfs:range :SiteWeb ;
+          
+          owl:inverseOf :estSiteWebDe .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aThème
+
+:aThème rdf:type owl:ObjectProperty ;
+        
+        rdfs:domain :Musée ;
+        
+        rdfs:range :Thème .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aVille
+
+:aVille rdf:type owl:FunctionalProperty ,
+                 owl:ObjectProperty ;
+        
+        rdfs:domain :Localisation ;
+        
+        rdfs:range :Ville ;
+        
+        owl:inverseOf :estVilleDe .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estDépartementDe
+
+:estDépartementDe rdf:type owl:InverseFunctionalProperty ,
+                           owl:ObjectProperty ;
+                  
+                  rdfs:domain :Département ;
+                  
+                  rdfs:range :Ville .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estFermetureAnnuelle
+
+:estFermetureAnnuelle rdf:type owl:ObjectProperty ;
+                      
+                      rdfs:domain :FermetureAnnuelle ;
+                      
+                      rdfs:range :Musée ;
+                      
+                      owl:inverseOf :aFermetureAnnuelle .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estHoraireOuverture
+
+:estHoraireOuverture rdf:type owl:InverseFunctionalProperty ,
+                              owl:ObjectProperty ;
+                     
+                     rdfs:domain :HoraireOuverture ;
+                     
+                     rdfs:range :Musée ;
+                     
+                     owl:inverseOf :aPériodeOuverture .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estLocalisationDe
+
+:estLocalisationDe rdf:type owl:InverseFunctionalProperty ,
+                            owl:ObjectProperty ;
+                   
+                   rdfs:domain :Localisation ;
+                   
+                   rdfs:range :Musée ;
+                   
+                   owl:inverseOf :aLocalisation .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estOuvertureNoctureDe
+
+:estOuvertureNoctureDe rdf:type owl:ObjectProperty ;
+                       
+                       rdfs:range :Musée ;
+                       
+                       rdfs:domain :OuvertureNocture .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estRégionDe
+
+:estRégionDe rdf:type owl:InverseFunctionalProperty ,
+                      owl:ObjectProperty ;
+             
+             rdfs:range :Département ;
+             
+             rdfs:domain :Région .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estRéouvertureDe
+
+:estRéouvertureDe rdf:type owl:ObjectProperty ;
+                  
+                  rdfs:range :Musée ;
+                  
+                  rdfs:domain :Réouverture .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estSiteWebDe
+
+:estSiteWebDe rdf:type owl:ObjectProperty ;
+              
+              rdfs:range :Musée ;
+              
+              rdfs:domain :SiteWeb .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estThèmeDe
+
+:estThèmeDe rdf:type owl:ObjectProperty ;
+            
+            rdfs:range :Musée ;
+            
+            rdfs:domain :Thème ;
+            
+            owl:inverseOf :aThème .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#estVilleDe
+
+:estVilleDe rdf:type owl:InverseFunctionalProperty ,
+                     owl:ObjectProperty ;
+            
+            rdfs:range :Localisation ;
+            
+            rdfs:domain :Ville .
+
+
+
+
+
+#################################################################
+#
+#    Data properties
+#
+#################################################################
+
+
+###  http://www.musee.com/ontologies/musee.owl#aCodePostal
+
+:aCodePostal rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             
+             rdfs:domain :Ville ;
+             
+             rdfs:range xsd:int .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aNomDépartement
+
+:aNomDépartement rdf:type owl:DatatypeProperty ;
+                 
+                 rdfs:domain :Département ;
+                 
+                 rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aNomMusée
+
+:aNomMusée rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :Musée ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aNomRégion
+
+:aNomRégion rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            
+            rdfs:domain :Région ;
+            
+            rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aNomThème
+
+:aNomThème rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :Thème ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aNomVille
+
+:aNomVille rdf:type owl:DatatypeProperty ;
+           
+           rdfs:domain :Ville ;
+           
+           rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aPériodeFermeture
+
+:aPériodeFermeture rdf:type owl:DatatypeProperty ;
+                   
+                   rdfs:domain :FermetureAnnuelle ;
+                   
+                   rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aPériodeNocturne
+
+:aPériodeNocturne rdf:type owl:DatatypeProperty ;
+                  
+                  rdfs:domain :OuvertureNocture ;
+                  
+                  rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aPériodeOuverture
+
+:aPériodeOuverture rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   
+                   rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aPériodeRéouverture
+
+:aPériodeRéouverture rdf:type owl:DatatypeProperty ;
+                     
+                     rdfs:domain :Réouverture ;
+                     
+                     rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aRue
+
+:aRue rdf:type owl:DatatypeProperty ;
+      
+      rdfs:domain :Ville ;
+      
+      rdfs:range xsd:string .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#aURL
+
+:aURL rdf:type owl:DatatypeProperty ;
+      
+      rdfs:domain :SiteWeb ;
+      
+      rdfs:range xsd:string .
+
+
+
+
+
+#################################################################
+#
+#    Classes
+#
+#################################################################
+
+
+###  http://www.musee.com/ontologies/musee.owl#Département
+
+:Département rdf:type owl:Class ;
+             
+             rdfs:subClassOf :Localisation .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#FermetureAnnuelle
+
+:FermetureAnnuelle rdf:type owl:Class ;
+                   
+                   rdfs:subClassOf :Période .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#HoraireOuverture
+
+:HoraireOuverture rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf :Période .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Localisation
+
+:Localisation rdf:type owl:Class .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Musée
+
+:Musée rdf:type owl:Class .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#MuséeDisponible
+
+:MuséeDisponible rdf:type owl:Class ;
+                 
+                 rdfs:subClassOf :Musée ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :aRéouverture ;
+                                   owl:onClass :Réouverture ;
+                                   owl:qualifiedCardinality "0"^^xsd:nonNegativeInteger
+                                 ] .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#OuvertureNocture
+
+:OuvertureNocture rdf:type owl:Class ;
+                  
+                  rdfs:subClassOf :Période .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Période
+
+:Période rdf:type owl:Class .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Région
+
+:Région rdf:type owl:Class ;
+        
+        rdfs:subClassOf :Localisation .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Réouverture
+
+:Réouverture rdf:type owl:Class ;
+             
+             rdfs:subClassOf :Période .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#SiteWeb
+
+:SiteWeb rdf:type owl:Class .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Thème
+
+:Thème rdf:type owl:Class .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#Ville
+
+:Ville rdf:type owl:Class ;
+       
+       rdfs:subClassOf :Localisation .
+
+
+
+
+
+#################################################################
+#
+#    Individuals
+#
+#################################################################
+
+
+###  http://www.musee.com/ontologies/musee.owl#D1
+
+:D1 rdf:type :Département ,
+             :Localisation ,
+             owl:NamedIndividual ;
+    
+    :aNomDépartement "Bas-Rhin" ;
+    
+    :aRégion :R1 ;
+    
+    :estDépartementDe :R1 .
+
+
+
+###  http://www.musee.com/ontologies/musee.owl#R1
+
+:R1 rdf:type :Localisation ,
+             :Région ,
+             :Ville ,
+             owl:NamedIndividual ;
+    
+    :aNomRégion "Alsace" ;
+    
+    :aDépartement :D1 ;
+    
+    :estRégionDe :D1 .
+
+
+
+
+###  Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net
+
