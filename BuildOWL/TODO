@@ -1,8 +1,0 @@
-Modifier RegionDepartement :
-	- pour chaque région / département mettre un ID
-
-Pour chaque colonne :
-	- faire une liste unique
-	- générer le code turtle avec des ID
-
-Créer un nouveau csv qui remplace les valeurs par les ID pour chaque colonne

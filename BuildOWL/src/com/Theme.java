@@ -1,5 +1,10 @@
 package com;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -188,7 +193,7 @@ public class Theme {
 				"Musée René Davoine\n" + 
 				"Musée d'Art et d'Archéologie\n" + 
 				"Musée de l'Homme et de l'Industrie - Ecomusée de la Communauté Le Creusot-Monceau-Les-Mines\n" + 
-				"L'Atelier d'un Journal\" de Louhans - Musée Municipal\n" + 
+				"L'Atelier d'un Journal de Louhans - Musée Municipal\n" + 
 				"Musée des Ursulines\n" + 
 				"Musée Lamartine\n" + 
 				"Musée de la Tour du Moulin\n" + 
@@ -280,7 +285,7 @@ public class Theme {
 				"Musée de la poste\n" + 
 				"Musée de l'Hôtel de Communes\n" + 
 				"Musée du Vieux Chinon\n" + 
-				"\"Maison Musée\" René Descartes\n" + 
+				"Maison Musée René Descartes\n" + 
 				"Musée de Préhistoire du Grand Pressigny\n" + 
 				"Musée du Terroir\n" + 
 				"Musée Lansyer\n" + 
@@ -546,7 +551,7 @@ public class Theme {
 				"Collections de la Fondation de Coubertin\n" + 
 				"Musée Lambinet\n" + 
 				"Etablissement Public du Musée et du Domaine National de Versailles\n" + 
-				"Musée Municipal \"Eburomagus Musée Archéologique\"\n" + 
+				"Musée Municipal Eburomagus Musée Archéologique\n" + 
 				"Musée des Beaux-Arts\n" + 
 				"Musée Archéologique du Lauragais\n" + 
 				"Musée Municipal\n" + 
@@ -626,7 +631,7 @@ public class Theme {
 				"Musée Historique Lorrain\n" + 
 				"Musée de l'Ecole de Nancy\n" + 
 				"Musée des Beaux-Arts de Nancy\n" + 
-				"Musée \"au Fil du Papier\"\n" + 
+				"Musée au Fil du Papier\n" + 
 				"Musée d'Art et d'Histoire de Toul\n" + 
 				"Musée Barrois\n" + 
 				"Musée de la Céramique et de l'Ivoire\n" + 
@@ -712,7 +717,7 @@ public class Theme {
 				"Musée Champollion - Les Ecriture du Monde\n" + 
 				"Musée d'Histoire de Figeac\n" + 
 				"Musée Murat\n" + 
-				"Musée Archéologique \"Armand-Viré\"\n" + 
+				"Musée Archéologique Armand-Viré\n" + 
 				"Musée Gallo-Romain d'Uxellodunum\n" + 
 				"Musée d'Art Sacré\n" + 
 				"Musée Départemental de Cuzals\n" + 
@@ -785,7 +790,7 @@ public class Theme {
 				"Musée Municipal Bruno Danvin\n" + 
 				"Musée Jean-Charles Cazin\n" + 
 				"Musée du Débarquement\n" + 
-				"Musée Baron Gérard\n" + 
+				"T_940\n" + 
 				"Musée Langlois\n" + 
 				"Musée de la Société des Antiquaires\n" + 
 				"Musée de Normandie\n" + 
@@ -1060,7 +1065,7 @@ public class Theme {
 				"Musée Granet\n" + 
 				"Musée Paul Arbaud\n" + 
 				"Musée des Tapisseries\n" + 
-				"Musée- Atelier de Paul Cézanne\n" + 
+				"Musée-Atelier de Paul Cézanne\n" + 
 				"Muséum d'Histoire Naturelle\n" + 
 				"Musée Camarguais\n" + 
 				"Muséon Arlaten\n" + 
@@ -1253,21 +1258,162 @@ public class Theme {
 
 		Map<String,Integer> map = new HashMap<String,Integer>();
 
-		int j=0;
-		for (String i : tmp.split("\n")){
-			if (i.startsWith("Musée de la "))
-				map.put(i.split("Musée de la ")[1],j);
-			else if (i.startsWith("Musée des "))
-				map.put(i.split("Musée des ")[1],j);
-			else if (i.startsWith("Musée d'"))
-				map.put(i.split("Musée d'")[1],j);
-			else if (i.startsWith("Musée du "))
-				map.put(i.split("Musée du ")[1],j);
+		int j=1;
+		for (String i : tmp.split("\n")){			
+			String r = getKey(i);
+			if (r != null)
+				map.put(getKey(i),j);
 			j++;
 		}
-		
+
+		Writer writer = null;
+
+		try {
+			writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("owl/split/theme.txt"), "utf-8"));
+
+			for (String k : map.keySet()){
+				String toAdd = "###  http://www.musee.com/ontologies/musee.owl#T_"+map.get(k)+"\n\n";
+				toAdd += ":T_"+map.get(k)+" rdf:type owl:NamedIndividual ;\n\n";
+				toAdd += "    :aNomThème \""+k+"\" .\n\n\n\n";
+				writer.write(toAdd);
+			}
+
+		} catch (IOException ex) {
+			// report
+		} finally {
+			try {writer.close();} catch (Exception ex) {}
+		}
+
+		/*or (String i : tmp.split("\n")){
+			if (getKey(i) == null)
+				System.out.println("");
+			else
+				System.out.println("T_"+map.get(getKey(i)));
+		}*/
+
+		/*		
 		for (String k : map.keySet())
 			System.out.println(k + " / " + map.get(k));
+		System.out.println(j + " / " + map.size());
+		 */
+	}
+
+	public static String getKey (String i){
+		if (i.startsWith("Musée National "))
+			i="Musée " + i.split("Musée National ")[1];
+		else if (i.startsWith("Musée Régional "))
+			i="Musée " + i.split("Musée Régional ")[1];
+		else if (i.startsWith("Musée Départemental "))
+			i="Musée " + i.split("Musée Départemental ")[1];
+		else if (i.startsWith("Musée Historique "))
+			i="Musée " + i.split("Musée Historique ")[1];
+		else if (i.startsWith("Musée Municipal "))
+			i="Musée " + i.split("Musée Municipal ")[1];
+		else if (i.startsWith("Musée Communal "))
+			i="Musée " + i.split("Musée Communal ")[1];
+		else if (i.startsWith("Musée International "))
+			i="Musée " + i.split("Musée International ")[1];
+
+		if (i.startsWith("Maison ") || i.startsWith("Musées ")
+				|| i.startsWith("Galerie ") || i.startsWith("Ecomusée ")
+				|| i.startsWith("Institut ") || i.startsWith("Musée-Château ") || i.startsWith("Musée-château ")
+				|| i.startsWith("Mémorial ") || i.startsWith("Forum ") || i.startsWith("Château-Musée ")
+				|| i.startsWith("Muséum ") || i.startsWith("Musée-Jardin ") || i.startsWith("Musée-Historial ")
+				|| i.startsWith("Musée-Maison ") || i.startsWith("Musée-Atelier ")
+				|| i.startsWith("Château ") || i.startsWith("Bibliothèque-musée ")
+				|| i.startsWith("Muséon ") || i.startsWith("Pharmacie Musée ")
+				|| i.startsWith("Musée-Cloître ") || i.startsWith("Villa-Musée ")
+				|| i.startsWith("Cité ") || i.startsWith("Collection ")
+				|| i.startsWith("Centre National ") || i.startsWith("Conservatoire ")
+				|| i.startsWith("Établissement Public ") || i.startsWith("Familistère ")
+				|| i.startsWith("Association ") || i.startsWith("Grande Galerie ")
+				|| i.startsWith("Pavillon ") || i.startsWith("Viséum-Musée ")
+				|| i.startsWith("Musée-Promenade ") || i.startsWith("Lieu ") || i.startsWith("Fondation  ")
+				|| i.startsWith("Palais ") || i.startsWith("Cabinet ") || i.startsWith("Musée-Bibliothèque "))
+			i="Musée "+i.split(" ",2)[1];
+		else if (i.startsWith("Muséoparc - "))
+			i="Musée Alésia";
+		else if (i.equals("Musée-Aquarium"))
+			i="Musée Aquarium";
+		else if (i.equals("Hôtel Dieu - Musée Greuze"))
+			i="Musée Greuze";
+		else if (i.equals("Le Port-Musée"))
+			i="Musée Port";
+		else if (i.equals("Maison Musée René Descartes"))
+			i="Musée René Descartes";
+		else if (i.equals("Château Musées de Blois"))
+			i="Musée de Blois";
+		else if (i.equals("Atelier Musée Louis Leygue"))
+			i="Musée Louis Leygue";
+		else if (i.equals("Forge-Musée"))
+			i="Musée Forge";
+		else if (i.equals("Sèvres - Cité de la Céramique"))
+			i="Musée de la Céramique";
+		else if (i.equals("Les Catacombes"))
+			i="Musée Catacombes";
+		else if (i.equals("Musée au Fil du Papier") || i.equals("Atelier - Musée du Papier"))
+			i="Musée Papier";
+		else if (i.equals("Centre Pompidou de Metz"))
+			i="Musée Pompidou";
+		else if (i.equals("Jardin d'Hiver, Musée de La Faïence"))
+			i="Musée Faïence";
+		else if (i.equals("Moulin de la Blies - Musée des Techniques Faïencières"))
+			i="Musée Faïence";
+		else if (i.equals("La Tour aux Puces - Musée du Pays Thionvillois"))
+			i="Musée du Pays Thionvillois";
+		else if (i.equals("La Maison de l'Armateur"))
+			i="Musée de l'Armateur";
+		else if (i.equals("Historial et Mémorial de la Vendée"))
+			i="Musée de la Vendée";
+		else if (i.equals("Centre Minier de Faymoreau"))
+			i="Musée de la Mine";
+		else if (i.equals("Atelier - Musée du Chapeau"))
+			i="Musée Chapeau";
+		else if (i.equals("Centre d'Histoire de la Résistance et de la Déportation"))
+			i="Musée de la Résistance et de la Déportation";
+		else if (i.equals("Musée-Aquarium"))
+			i="Musée Aquarium";
+		else if (i.startsWith("Musée Archéologique "))
+			i="Musée Archéologie";
+
+		//|| i.startsWith("Maison Musée" ) || i.startsWith("Atelier Musée" ) || i.startsWith("Sèvres - Cité " )
+
+
+		if (i.equals("Musée-Aquarium"))
+			i="Musée Aquarium";
+
+		String key = null;
+		if (i.startsWith("Musée de la "))
+			key=i.split("Musée de la ")[1];
+		else if (i.startsWith("Musée de l'"))
+			key=i.split("Musée de l'")[1];
+		else if (i.startsWith("Musée de "))
+			key=i.split("Musée de ")[1];
+		else if (i.startsWith("Musée des "))
+			key=i.split("Musée des ")[1];
+		else if (i.startsWith("Musée d'"))
+			key=i.split("Musée d'")[1];
+		else if (i.startsWith("Musée du "))
+			key=i.split("Musée du ")[1];
+		else if (i.startsWith("Musée ") && !i.equals("Musée") && !i.startsWith("Musée Musée") &&
+				!i.endsWith("National") && !i.endsWith("Régional") && !i.endsWith("Départemental") &&
+				!i.endsWith("International") && !i.endsWith("Municipal") && !i.endsWith("Communal"))
+			key=i.split("Musée ")[1];
+
+		if (key == null)
+			return null;
+
+		key=key.replaceAll("et du", "/");
+		key=key.replaceAll("et d'", "/ ");
+		key=key.replaceAll("et de la", "/");
+		key=key.replaceAll("et des", "/");
+		key=key.replaceAll("et de", "/");
+		key=key.replaceAll("-", "/");
+
+		if (key.length() >= 2)
+			key=key.substring(0, 1).toUpperCase() + key.substring(1);
+
+		return key;
 	}
 
 }
