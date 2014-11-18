@@ -1,4 +1,4 @@
-package com;
+package gen;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

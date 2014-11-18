@@ -1,4 +1,4 @@
-package com;
+package gen;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

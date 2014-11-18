@@ -9,7 +9,7 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
 prefix db-owl: <http://dbpedia.org/ontology/>
 prefix db-res: <http://fr.dbpedia.org/resource/>
- select ?r where {
-    ?r rdf:type db-owl:AdministrativeRegion .
-    ?r rdfs:label "ILE-DE-FRANCE"@fr .
+select ?r where {
+    ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://dbpedia.org/ontology/AdministrativeRegion> .
+    ?r <http://www.w3.org/1999/02/22-rdf-syntax-ns#label> "Rhône-Alpes"@fr .
 }
