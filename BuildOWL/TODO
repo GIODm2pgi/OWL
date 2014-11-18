@@ -1,0 +1,4 @@
+- Ajouter des liens rdf:type entre nos entités et http://lov.okfn.org/dataset/lov/
+- Définir les fonctionnalités de l'application
+- Écrire les requetes sparql des fonctionnalités
+- Dévellopper l'application

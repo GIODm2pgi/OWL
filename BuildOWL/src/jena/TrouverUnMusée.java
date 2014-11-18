@@ -10,9 +10,9 @@ public class TrouverUnMusée {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		Model model = ModelFactory.createDefaultModel();
-		model.read(new FileInputStream("data/owl/inferred/musee_data_inferred.owl"), null, "TURTLE");
+		model.read(new FileInputStream("data/musee.owl"), null, "TURTLE");
 		
-		String region = "Alsace";
+		String region = "Rhône-Alpes";
 		
 		for (String s : RequêteMusée.trouverMuseeParRegion(model, region))
 			System.out.println(s);	
